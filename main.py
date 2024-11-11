@@ -12,6 +12,8 @@ def main():
         LoanUtility.read_loans(file_path)
     except Exception as e:
         LogUtility.log_error(e)
+        raise e
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

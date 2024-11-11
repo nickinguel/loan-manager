@@ -4,21 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/cephasking.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/constant_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/loan.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/loanee.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/loan_utility.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/log_utility.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/misc_utility.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/repayment_utility.py" afterDir="false" />
+    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="Project started an few classes added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/loan_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/loan_utility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/misc_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/misc_utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "nickinguel"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/nickinguel/loan-manager.git",
+    "accountId": "0cd45904-d8dc-40e9-9ad7-bf60987f649f"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -95,6 +97,30 @@
       <option name="presentableId" value="Default" />
       <updated>1731191353087</updated>
     </task>
+    <task id="LOCAL-00001" summary="Project started an few classes added">
+      <option name="closed" value="true" />
+      <created>1731327847296</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731327847296</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Project started an few classes added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project started an few classes added" />
   </component>
 </project>
