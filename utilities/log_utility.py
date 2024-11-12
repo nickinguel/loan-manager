@@ -1,13 +1,18 @@
+from colorama import init, Fore, Back
+
+init()
+
+
 class LogUtility:
 
     @staticmethod
     def log_error(ex: Exception):
-        print(ex)
+        print(Fore.RED + str(ex))
 
     @staticmethod
     def log_success(message: str):
-        print(message)
+        print(Fore.GREEN + message)
 
     @staticmethod
     def log_info(message: str):
-        print(message)
+        print(Fore.CYAN + message)

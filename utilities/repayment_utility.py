@@ -2,8 +2,7 @@ from typing import Any
 
 from openpyxl.cell import Cell
 from openpyxl.styles import Font, Alignment
-from openpyxl.worksheet._reader import ColumnDimension
-from openpyxl.worksheet.dimensions import DimensionHolder
+from openpyxl.worksheet.dimensions import DimensionHolder, ColumnDimension
 from openpyxl.worksheet.worksheet import Worksheet
 from configs.constant_data import ConstData
 from models.excel_cell_data import ExcelCellData

@@ -51,6 +51,11 @@ def main():
     if no_error:
         LogUtility.log_success(ConstData.message_all_ok.format(file_path))
 
+    print()
+    LogUtility.log_info("-" * 25)
+    LogUtility.log_info(" - By Nick KINGUELEOUA - ")
+    LogUtility.log_info("-" * 25)
+
 
 if __name__ == '__main__':
     main()

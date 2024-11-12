@@ -1,6 +1,6 @@
 from openpyxl import Workbook, load_workbook
+from openpyxl.cell import Cell
 from openpyxl.utils.datetime import from_excel
-from openpyxl.worksheet._reader import Cell
 from openpyxl.worksheet.worksheet import Worksheet
 from configs.constant_data import ConstData
 from models.loan import Loan
@@ -154,7 +154,7 @@ class LoanUtility:
     @staticmethod
     def convert_repayment_logic(logic: str, loan_amount: int):
         """
-        Takes the original repayment logic from the excel file and convert it to basic + operation
+        Takes the original repayment logic from the Excel file and convert it to basic + operation
         Exemple : 1000 * 2 ==> 1000 + 1000
         :param logic:
         :param loan_amount:
