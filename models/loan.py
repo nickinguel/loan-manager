@@ -5,8 +5,8 @@ from models.loanee import Loanee
 
 class Loan:
 
-    def __init__(self, loanee: Loanee, amount: float, repayment_logic: str, date: datetime.date):
+    def __init__(self, loanee: Loanee, amount: int, repayment_logic: str, date: datetime.date):
         self.loanee = loanee
         self.amount = amount
         self.repayment_logic = repayment_logic
-        self.date = date
+        self.date: datetime = date

@@ -1,6 +1,5 @@
 import datetime
 from copy import copy
-
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.datetime import from_excel
 from openpyxl.worksheet._reader import Cell
@@ -58,7 +57,7 @@ class LoanUtility:
         :return:
         """
 
-        loans: list[Loan] = None
+        loans: list[Loan] = []
 
         for cells_tpl in sheet.iter_rows(min_row=2, values_only=False):
             cells_values = tuple([cell.value for cell in cells_tpl])
@@ -68,15 +67,49 @@ class LoanUtility:
                 raise Exception("Dans la feuille '{0}', la ligne '{1}' a des valeurs manquantes ou incorrectes pour les colonnes suivantes : {2}"
                                 .format(ConstData.excel_sheet_loan, cells_tpl[0].row.real, MiscUtility.format_array_as_bullets(missing_values))
                             )
+
+            loan = LoanUtility.instantiate_loan_from_xl_row(cells_values, headers)
+            loans.append(loan)
+
+        return loans
+
+    loanees: dict[str, Loanee] = None
+
+    @staticmethod
+    def instantiate_loan_from_xl_row(cells_values: tuple[str, ...], headers: dict[str, int]) -> Loan:
+        """
+        Create a Loan object from excel data row
+        :param cells_values:
+        :param headers:
+        :return:
+        """
+
+        if LoanUtility.loanees is None:
+            LoanUtility.loanees = {}
+
+        loanee_id = cells_values[headers[ConstData.excel_col_loan_debtor_ID]]
+        loanee: Loanee = LoanUtility.loanees.get(loanee_id)
+
+        if not loanee:
             loanee = Loanee(
-                cells_values[headers[ConstData.excel_col_loan_debtor_ID]],
+                loanee_id,
                 cells_values[headers[ConstData.excel_col_loan_debtor_first_name]],
                 cells_values[headers[ConstData.excel_col_loan_debtor_last_name]]
             )
 
-            # loans.append(Loan())
+            LoanUtility.loanees[loanee_id] = loanee
 
-        return loans
+        amount = int(cells_values[headers[ConstData.excel_col_loan_amount]])
+        repayment_logic_converted = LoanUtility.convert_repayment_logic(cells_values[headers[ConstData.excel_col_loan_repayment_logic]], amount)
+
+        loan = Loan(
+            loanee,
+            amount,
+            repayment_logic_converted,
+            from_excel(cells_values[headers[ConstData.excel_col_loan_date]])
+        )
+
+        return loan
 
     @staticmethod
     def check_loan_row(headers: dict[str, int], row_values: tuple[Cell, ...]) -> list[str]:
@@ -105,8 +138,6 @@ class LoanUtility:
                 int(row_values[headers[ConstData.excel_col_loan_amount]].value)
             )
             repayment_amount = eval(converted_logic)
-
-            print(str(row_values[headers[ConstData.excel_col_loan_repayment_logic]].value), " --> ", converted_logic)
 
             if int(row_values[headers[ConstData.excel_col_loan_amount]].value) != repayment_amount:
                 missing_cells.append(ConstData.excel_col_loan_repayment_logic)
