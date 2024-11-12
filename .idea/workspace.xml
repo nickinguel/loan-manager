@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="Cells values and expected formats all checked.&#10;+ Repayment logic also hardly checked">
+    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="Loans row cells are now converted to Loan objects">
+      <change afterPath="$PROJECT_DIR$/models/excel_cell_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/repayment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utilities/excel_utility.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/constant_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/configs/constant_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/loan.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/loan.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilities/loan_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/loan_utility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/misc_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/misc_utility.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilities/repayment_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/repayment_utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731354873714</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Loans row cells are now converted to Loan objects">
+      <option name="closed" value="true" />
+      <created>1731404901236</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731404901236</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,18 +144,26 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Project started an few classes added" />
     <MESSAGE value="Cells values and expected formats all checked.&#10;+ Repayment logic also hardly checked" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cells values and expected formats all checked.&#10;+ Repayment logic also hardly checked" />
+    <MESSAGE value="Loans row cells are now converted to Loan objects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Loans row cells are now converted to Loan objects" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <condition expression="loanee is not None" language="Python" />
-          <url>file://$PROJECT_DIR$/utilities/loan_utility.py</url>
-          <line>92</line>
-          <option name="timeStamp" value="3" />
+          <condition expression="self.loanee.ID == &quot;HABOU100&quot;" language="Python" />
+          <url>file://$PROJECT_DIR$/models/repayment.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
 </project>

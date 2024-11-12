@@ -1,5 +1,3 @@
-import datetime
-from copy import copy
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.datetime import from_excel
 from openpyxl.worksheet._reader import Cell
@@ -8,7 +6,6 @@ from configs.constant_data import ConstData
 from models.loan import Loan
 from models.loanee import Loanee
 from utilities.misc_utility import MiscUtility
-import os
 import re
 
 
@@ -20,9 +17,6 @@ class LoanUtility:
         loans: list[Loan] = []
 
         try:
-            if not os.path.exists(file_path):
-                raise Exception(f"Aucun fichier trouvé à l'emplacement spécifié '{file_path}'")
-
             workbook = MiscUtility.open_workbook(file_path)
             loan_sheet = workbook.get_sheet_by_name(ConstData.excel_sheet_loan)
 
