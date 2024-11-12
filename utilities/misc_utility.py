@@ -1,27 +1,28 @@
 import datetime
 import os
 from copy import copy
-
 from dateutil import relativedelta
 from openpyxl import Workbook
 from openpyxl.reader.excel import load_workbook
-import openpyxl
+from tkinter import Tk     # from tkinter import Tk for Python 3.x
+from tkinter.filedialog import askopenfilename
 
 
 class MiscUtility:
 
     @staticmethod
+    def browse_file_path(prompt: str):
+        Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
+        filename = askopenfilename(
+            title=prompt,
+            filetypes=(('Excel', "*.xlsx"), ('Excel legacy', "*.xls"))
+        )
+
+        return filename
+
+    @staticmethod
     def get_next_month(date: datetime.date) -> datetime.date:
         return date + relativedelta.relativedelta(months=1)
-        next_month_date: datetime.datetime = copy(date)
-
-        try:
-            next_month_date = next_month_date.replace(month=next_month_date.month + 1)
-        except ValueError:
-            if next_month_date.month == 12:
-                next_month_date = next_month_date.replace(year=next_month_date.year + 1, month=1)
-
-        return next_month_date
 
     @staticmethod
     def open_workbook(file_path: str) -> Workbook:

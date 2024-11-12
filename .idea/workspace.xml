@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="Loans row cells are now converted to Loan objects">
-      <change afterPath="$PROJECT_DIR$/models/excel_cell_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/repayment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilities/excel_utility.py" afterDir="false" />
+    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="- Repayments are written in the files&#10;- Cells formatting added&#10;- Yearly total added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/constant_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/configs/constant_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/loan.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/loan.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilities/loan_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/loan_utility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/log_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/log_utility.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilities/misc_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/misc_utility.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/repayment_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/repayment_utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +123,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731404901236</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="- Repayments are written in the files&#10;- Cells formatting added&#10;- Yearly total added">
+      <option name="closed" value="true" />
+      <created>1731433036146</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731433036146</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -145,7 +149,8 @@
     <MESSAGE value="Project started an few classes added" />
     <MESSAGE value="Cells values and expected formats all checked.&#10;+ Repayment logic also hardly checked" />
     <MESSAGE value="Loans row cells are now converted to Loan objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Loans row cells are now converted to Loan objects" />
+    <MESSAGE value="- Repayments are written in the files&#10;- Cells formatting added&#10;- Yearly total added" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Repayments are written in the files&#10;- Cells formatting added&#10;- Yearly total added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -155,6 +160,11 @@
           <url>file://$PROJECT_DIR$/models/repayment.py</url>
           <line>16</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>15</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

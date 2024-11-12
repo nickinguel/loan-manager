@@ -26,5 +26,7 @@ class ConstData:
     excel_cols_repayments = (excel_col_loan_debtor_ID, excel_col_loan_debtor_first_name, excel_col_loan_debtor_last_name,
                              excel_col_repayment_total_amount_loaned, *months)
 
-
+    # Messages
+    message_all_ok = "Les feuilles de remboursements ont été générées avec succès dans le fichier '{0}'"
+    message_loan_sheet_missing = "La feuille '{0}'".format(excel_sheet_loan) + " n'existe pas dns le fichier spécifié '{0}'"
 

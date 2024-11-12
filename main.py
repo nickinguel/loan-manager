@@ -1,13 +1,26 @@
+import sys
+
+from configs.constant_data import ConstData
 from models.loan import Loan
 from utilities.loan_utility import LoanUtility
 from utilities.log_utility import LogUtility
+from utilities.misc_utility import MiscUtility
 from utilities.repayment_utility import RepaymentUtility
 
 
 def main():
-    file_path = '/Volumes/MyData/Temp/Harelle/Loans.xlsx'
+
+    file_path: str | None = None
+    # file_path = '/Volumes/MyData/Temp/Harelle/Loans.xlsx'
+
+    if len(sys.argv) >= 2:
+        file_path = sys.argv[1]
+
+    if file_path is None or len(file_path.strip()) == 0:
+        file_path = MiscUtility.browse_file_path("Choisissez le fichier Excel à manipuler")
 
     loans: list[Loan]
+    no_error = True
 
     try:
         # Retrieve and parse Loans from Excel
@@ -26,18 +39,19 @@ def main():
 
         # Compute sheets data
         sheets_data = RepaymentUtility.compute_sheets_data(repayments_grouped)
-        print(sheets_data)
 
         # Write data to workbook
         RepaymentUtility.write_repayments_to_excel(file_path, sheets_data)
 
     except Exception as e:
         LogUtility.log_error(e)
-        raise e
+        no_error = False
+        # raise e
+
+    if no_error:
+        LogUtility.log_success(ConstData.message_all_ok.format(file_path))
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     main()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

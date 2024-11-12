@@ -18,6 +18,10 @@ class LoanUtility:
 
         try:
             workbook = MiscUtility.open_workbook(file_path)
+
+            if ConstData.excel_sheet_loan not in workbook.sheetnames:
+                raise Exception(ConstData.message_loan_sheet_missing.format(file_path))
+
             loan_sheet = workbook.get_sheet_by_name(ConstData.excel_sheet_loan)
 
             # Check missing headers
