@@ -1,7 +1,8 @@
 from openpyxl.cell import Cell
-from openpyxl.styles import Font, Alignment, PatternFill, Color
+from openpyxl.styles import Font, Alignment, Color
+from openpyxl.styles.proxy import StyleProxy
 from openpyxl.workbook import Workbook
-from openpyxl.worksheet.dimensions import DimensionHolder, ColumnDimension
+from openpyxl.worksheet.dimensions import ColumnDimension, RowDimension
 from openpyxl.worksheet.worksheet import Worksheet
 from configs.constant_data import ConstData
 from models.excel_cell_data import ExcelCellData
@@ -53,7 +54,7 @@ class RepaymentUtility:
                         if slice_cell.value is None:
                             continue
 
-                        cell_fill: PatternFill = slice_cell.fill
+                        cell_fill: StyleProxy = slice_cell.fill
                         cell_bg: Color = cell_fill.bgColor
 
                         if cell_bg.value == "00000000":
@@ -73,29 +74,6 @@ class RepaymentUtility:
                 MiscUtility.close_workbook(workbook)
 
     @staticmethod
-    def write_data_to_sheet(workbook: Workbook, sheet_name: str, cells_data: dict[str, ExcelCellData], columns: tuple[str, ...],
-                            sheet_index: int = None) -> Worksheet:
-        sheet: Worksheet | None = None
-
-        if sheet_name in workbook.sheetnames:
-            sheet = workbook.get_sheet_by_name(sheet_name)
-        else:
-            sheet = workbook.create_sheet(sheet_name, index=sheet_index)
-
-        for cell_index, cell_data in cells_data.items():
-            cell: Cell = sheet[cell_index]
-
-            cell.alignment = RepaymentUtility.centered_alignment
-            cell.value = cell_data.value
-
-            if cell_data.font:
-                cell.font = cell_data.font
-
-        RepaymentUtility.stylize_sheet_general_cells(sheet, columns)
-
-        return sheet
-
-    @staticmethod
     def write_repayments_to_excel(file_path: str, data: dict[int, dict[str, ExcelCellData]]):
         """
         Write to file
@@ -109,7 +87,7 @@ class RepaymentUtility:
         try:
             for year, cells_data in data.items():
                 sheet_name = f"{sheet_prefix} {year}"
-                sheet = RepaymentUtility.write_data_to_sheet(workbook, sheet_name, cells_data, ConstData.excel_cols_repayments)
+                sheet = ExcelUtility.write_data_to_sheet(workbook, sheet_name, cells_data, ConstData.excel_cols_repayments)
 
                 RepaymentUtility.stylize_repayment_sheet_specific_columns(sheet)
 
@@ -127,7 +105,7 @@ class RepaymentUtility:
         end_col = end_col or len(columns)
 
         # FONTS
-        headers_row: DimensionHolder = sheet.row_dimensions[1]
+        headers_row: RowDimension = sheet.row_dimensions[1]
 
         # SIZES
         # - Widths
@@ -157,7 +135,7 @@ class RepaymentUtility:
         width: int
 
         # FONTS
-        headers_row: DimensionHolder = sheet.row_dimensions[1]
+        headers_row: RowDimension = sheet.row_dimensions[1]
 
         # SIZES
         # - Widths
@@ -328,7 +306,7 @@ class RepaymentUtility:
         sheet_name = ConstData.excel_sheet_stats
 
         try:
-            RepaymentUtility.write_data_to_sheet(workbook, sheet_name, data, ConstData.excel_cols_repayments, 1)
+            ExcelUtility.write_data_to_sheet(workbook, sheet_name, data, ConstData.excel_cols_repayments, 1)
 
             workbook.save(file_path)
         except (Exception,):
