@@ -46,10 +46,14 @@ def main():
         # Find paid slices
         paid_slices = RepaymentUtility.find_paid_slices(file_path)
         print(paid_slices)
+        print()
 
         # Compute stats data
         stats_data = RepaymentUtility.compute_stats(loans, paid_slices)
         print([(v, stats_data[v].value) for v in stats_data])
+
+        # Write stats
+        RepaymentUtility.write_stats_to_excel(stats_data, file_path)
 
 
     except Exception as e:

@@ -1,8 +1,5 @@
-from typing import Any, Callable
-
 from openpyxl.cell import Cell
 from openpyxl.styles import Font, Alignment, PatternFill, Color
-from openpyxl.styles.colors import ColorDescriptor
 from openpyxl.workbook import Workbook
 from openpyxl.worksheet.dimensions import DimensionHolder, ColumnDimension
 from openpyxl.worksheet.worksheet import Worksheet
@@ -35,7 +32,7 @@ class RepaymentUtility:
         :return:
         """
         workbook: Workbook | None = None
-        paid_slices: dict[str, list[(str, str)]] = {}
+        paid_slices: dict[str, list[(str, str, int)]] = {}
 
         try:
             workbook = MiscUtility.open_workbook(file_path)
@@ -65,7 +62,7 @@ class RepaymentUtility:
                         if paid_slices.get(loanee_id) is None:
                             paid_slices[loanee_id] = []
 
-                        paid_slices[loanee_id].append((month_name, year))
+                        paid_slices[loanee_id].append((month_name, year, int(slice_cell.value)))
 
             return paid_slices
 
@@ -74,6 +71,29 @@ class RepaymentUtility:
         finally:
             if workbook is not None:
                 MiscUtility.close_workbook(workbook)
+
+    @staticmethod
+    def write_data_to_sheet(workbook: Workbook, sheet_name: str, cells_data: dict[str, ExcelCellData], columns: tuple[str, ...],
+                            sheet_index: int = None) -> Worksheet:
+        sheet: Worksheet | None = None
+
+        if sheet_name in workbook.sheetnames:
+            sheet = workbook.get_sheet_by_name(sheet_name)
+        else:
+            sheet = workbook.create_sheet(sheet_name, index=sheet_index)
+
+        for cell_index, cell_data in cells_data.items():
+            cell: Cell = sheet[cell_index]
+
+            cell.alignment = RepaymentUtility.centered_alignment
+            cell.value = cell_data.value
+
+            if cell_data.font:
+                cell.font = cell_data.font
+
+        RepaymentUtility.stylize_sheet_general_cells(sheet, columns)
+
+        return sheet
 
     @staticmethod
     def write_repayments_to_excel(file_path: str, data: dict[int, dict[str, ExcelCellData]]):
@@ -89,18 +109,9 @@ class RepaymentUtility:
         try:
             for year, cells_data in data.items():
                 sheet_name = f"{sheet_prefix} {year}"
-                sheet: Worksheet = workbook.get_sheet_by_name(sheet_name) if sheet_name in workbook.sheetnames else workbook.create_sheet(sheet_name)
+                sheet = RepaymentUtility.write_data_to_sheet(workbook, sheet_name, cells_data, ConstData.excel_cols_repayments)
 
-                for cell_index, cell_data in cells_data.items():
-                    cell: Cell = sheet[cell_index]
-
-                    cell.alignment = RepaymentUtility.centered_alignment
-                    cell.value = cell_data.value
-
-                    if cell_data.font:
-                        cell.font = cell_data.font
-
-                RepaymentUtility.stylize_sheet(sheet)
+                RepaymentUtility.stylize_repayment_sheet_specific_columns(sheet)
 
             workbook.save(file_path)
         except (Exception,):
@@ -109,28 +120,22 @@ class RepaymentUtility:
             MiscUtility.close_workbook(workbook)
 
     @staticmethod
-    def stylize_sheet(sheet: Worksheet):
+    def stylize_sheet_general_cells(sheet: Worksheet, columns: tuple[str, ...], start_col: int = None, end_col: int = None, col_width = 20):
         width: int
+
+        start_col = start_col or 0
+        end_col = end_col or len(columns)
 
         # FONTS
         headers_row: DimensionHolder = sheet.row_dimensions[1]
 
         # SIZES
         # - Widths
-        for index, column_name in enumerate(ConstData.excel_cols_repayments):
-            if index == 0:
-                width = 15
-            elif index < 3:   # Loanee details
-                width = 20
-            elif index == 3:    # Amount
-                width = 30
-            else:               # Monts
-                width = 20
-
+        for index in range(start_col, end_col):
             column_index_letter = ConstData.alphabet[index]
 
             column_dimension_holder: ColumnDimension = sheet.column_dimensions[column_index_letter]
-            column_dimension_holder.width = width
+            column_dimension_holder.width = col_width
 
             # Headers
             header_cell: Cell = sheet[f"{column_index_letter}1"]
@@ -146,6 +151,37 @@ class RepaymentUtility:
 
         for i in range(2, sheet.max_row + 1):
             sheet.row_dimensions[i].height = 30
+
+    @staticmethod
+    def stylize_repayment_sheet_specific_columns(sheet: Worksheet):
+        width: int
+
+        # FONTS
+        headers_row: DimensionHolder = sheet.row_dimensions[1]
+
+        # SIZES
+        # - Widths
+        start_index = ConstData.excel_cols_repayments.index(ConstData.excel_col_repayment_yearly_amount_loaned)
+
+        for index in range(start_index, len(ConstData.excel_cols_repayments)):
+            if index == 3:  # Amount
+                width = 30
+            else:  # Months
+                width = 20
+
+            column_index_letter = ConstData.alphabet[index]
+
+            column_dimension_holder: ColumnDimension = sheet.column_dimensions[column_index_letter]
+            column_dimension_holder.width = width
+
+            # # Headers
+            # header_cell: Cell = sheet[f"{column_index_letter}1"]
+            #
+            # header_cell.alignment = RepaymentUtility.centered_alignment
+            # header_cell.font = Font(
+            #     size=12,
+            #     bold=True
+            # )
 
     @staticmethod
     def group_repayments_by_year(repayments: list[Repayment]):
@@ -261,7 +297,7 @@ class RepaymentUtility:
     @staticmethod
     def fill_annual_total_cells(sheets_data: dict[str, ExcelCellData], repayment: Repayment, index: int, columns: tuple[str, ...]):
         # Total
-        cell_index = ExcelUtility.get_cell_from_column_name(ConstData.excel_col_repayment_total_amount_loaned, index, columns)
+        cell_index = ExcelUtility.get_cell_from_column_name(ConstData.excel_col_repayment_yearly_amount_loaned, index, columns)
         sheets_data[cell_index] = ExcelCellData(sum([slice.amount for slice in repayment.slices]), Font(color="104db0", bold=False))
 
     @staticmethod
@@ -286,7 +322,29 @@ class RepaymentUtility:
         return list(repayments_repository.values())
 
     @staticmethod
-    def compute_stats(loans: list[Loan], refunded: dict[str, list[(str, str)]]):
+    def write_stats_to_excel(data: dict[str, ExcelCellData], file_path: str):
+        workbook = MiscUtility.open_workbook(file_path)
+
+        sheet_name = ConstData.excel_sheet_stats
+
+        try:
+            RepaymentUtility.write_data_to_sheet(workbook, sheet_name, data, ConstData.excel_cols_repayments, 1)
+
+            workbook.save(file_path)
+        except (Exception,):
+            raise
+        finally:
+            MiscUtility.close_workbook(workbook)
+
+
+    @staticmethod
+    def compute_stats(loans: list[Loan], refunded_slices: dict[str, list[(str, str)]]):
+        """
+
+        :param loans:
+        :param refunded_slices:
+        :return:
+        """
         previous_loanee: Loanee | None = None
         cells_values: dict[str, ExcelCellData] = {}
         loan_sum = 0
@@ -302,11 +360,33 @@ class RepaymentUtility:
             if previous_loanee is not None and (for_index == length or previous_loanee != loan.loanee):
                 excel_row_index += + 1
 
+                # Fill loanee details
                 RepaymentUtility.fill_loanee_cells(cells_values, previous_loanee, excel_row_index, ConstData.excel_cols_stats)
-                total_loan_cell_index = ExcelUtility.get_cell_from_column_name(ConstData.excel_col_stats_loan_total,
-                                                                               excel_row_index, ConstData.excel_cols_stats)
-                cells_values[total_loan_cell_index] = ExcelCellData(loan_sum)
 
+                # Total fields
+                cell_index = ExcelUtility.get_cell_from_column_name(ConstData.excel_col_stats_loan_total,
+                                                                               excel_row_index, ConstData.excel_cols_stats)
+                cells_values[cell_index] = ExcelCellData(loan_sum)
+
+                # Total refunded fields
+                cell_index = ExcelUtility.get_cell_from_column_name(ConstData.excel_col_stats_loan_total_refunded,
+                                                                    excel_row_index, ConstData.excel_cols_stats)
+                refunded_total: int
+                loanee_refunded_slices = refunded_slices.get(previous_loanee.ID)
+
+                if loanee_refunded_slices is not None:
+                    refunded_total = sum([sl_tpl[2] for sl_tpl in loanee_refunded_slices])
+                else:
+                    refunded_total = 0
+
+                cells_values[cell_index] = ExcelCellData(refunded_total)
+
+                # Total remaining
+                cell_index = ExcelUtility.get_cell_from_column_name(ConstData.excel_col_stats_loan_total_remaining,
+                                                                    excel_row_index, ConstData.excel_cols_stats)
+                cells_values[cell_index] = ExcelCellData(loan_sum - refunded_total)
+
+                # --
                 loan_sum = 0
 
             if loan is not None:

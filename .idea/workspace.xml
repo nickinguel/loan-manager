@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="- File browsing for Path&#10;- CMD line arguments for Path&#10;- Missing sheet error">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="- Stats logic started&#10;- Stats excel data are computed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/constant_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/configs/constant_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/excel_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/excel_utility.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilities/repayment_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/repayment_utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731435748051</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="- Stats logic started&#10;- Stats excel data are computed">
+      <option name="closed" value="true" />
+      <created>1731480140244</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731480140245</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -159,10 +165,19 @@
     <MESSAGE value="Loans row cells are now converted to Loan objects" />
     <MESSAGE value="- Repayments are written in the files&#10;- Cells formatting added&#10;- Yearly total added" />
     <MESSAGE value="- File browsing for Path&#10;- CMD line arguments for Path&#10;- Missing sheet error" />
-    <option name="LAST_COMMIT_MESSAGE" value="- File browsing for Path&#10;- CMD line arguments for Path&#10;- Missing sheet error" />
+    <MESSAGE value="- Stats logic started&#10;- Stats excel data are computed" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Stats logic started&#10;- Stats excel data are computed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <condition expression="sheet is None" language="Python" />
+          <url>file://$PROJECT_DIR$/utilities/repayment_utility.py</url>
+          <line>85</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
