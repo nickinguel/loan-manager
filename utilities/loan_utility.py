@@ -131,10 +131,15 @@ class LoanUtility:
         if re.search(r"^\d+(\s*[+*]\s*\d+)*$", str(row_values[headers[ConstData.excel_col_loan_repayment_logic]].value)) is None:
             missing_cells.append(ConstData.excel_col_loan_repayment_logic)
         else:
-            converted_logic = LoanUtility.convert_repayment_logic(
-                row_values[headers[ConstData.excel_col_loan_repayment_logic]].value,
-                int(row_values[headers[ConstData.excel_col_loan_amount]].value)
-            )
+            cell: Cell = row_values[headers[ConstData.excel_col_loan_amount]]
+            try:
+                converted_logic = LoanUtility.convert_repayment_logic(
+                    row_values[headers[ConstData.excel_col_loan_repayment_logic]].value,
+                    int(cell.value)
+                )
+            except Exception as e:
+                raise Exception(str(e).format(cell.row.real))
+
             repayment_amount = eval(converted_logic)
 
             if int(row_values[headers[ConstData.excel_col_loan_amount]].value) != repayment_amount:
@@ -165,6 +170,11 @@ class LoanUtility:
 
         if re.search(r"^\d+$", logic_str) is not None:
             slice_amount = int(logic_str)
+
+            if loan_amount % slice_amount != 0:
+                raise Exception(f"Le prêt de '{loan_amount}' n'est pas parfaitement divisible par le de remboursement '{slice_amount}' spécifié"
+                                + " sur la ligne {0}")
+
             return LoanUtility.write_slice_n_times(loan_amount // slice_amount, slice_amount)
 
         while (re_match := re.search(r"(\d+)\s*\*\s*(\d+)", logic_str)) is not None:

@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="- Stats logic started&#10;- Stats excel data are computed">
+    <list default="true" id="5f728f4f-5ebc-48c7-938f-0ed3b453ea36" name="Changes" comment="Added colors by Colorama">
+      <change afterPath="$PROJECT_DIR$/configs/configs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/constant_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/configs/constant_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/repayment_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/repayment_utility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/loan_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/loan_utility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/log_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/log_utility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/misc_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/misc_utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +36,12 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/nickinguel/loan-manager.git&quot;,
-    &quot;accountId&quot;: &quot;0cd45904-d8dc-40e9-9ad7-bf60987f649f&quot;
+    &quot;accountId&quot;: &quot;fcf038e9-2a55-4bcc-8e9e-06cb356184cf&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -54,7 +59,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Data/Others/pythonvenv/LoanManagerEnv&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;proofread&quot;
   }
 }</component>
   <component name="RunManager">
@@ -63,17 +71,15 @@
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (LoanManagerEnv)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="$PROJECT_DIR$/../../../../Temp/Harelle/Loans.xlsx" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="PARAMETERS" value="D:\Temp\Harelle/Loans.xlsx" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -84,7 +90,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-975db3bf15a3-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.18034.82" />
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
       </set>
     </attachedChunks>
   </component>
@@ -129,23 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731433036146</updated>
     </task>
-    <task id="LOCAL-00005" summary="- File browsing for Path&#10;- CMD line arguments for Path&#10;- Missing sheet error">
+    <task id="LOCAL-00005" summary="Added colors by Colorama">
       <option name="closed" value="true" />
-      <created>1731435748050</created>
+      <created>1731446635498</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1731435748051</updated>
+      <updated>1731446635498</updated>
     </task>
-    <task id="LOCAL-00006" summary="- Stats logic started&#10;- Stats excel data are computed">
-      <option name="closed" value="true" />
-      <created>1731480140244</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1731480140245</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -153,7 +151,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -164,18 +174,17 @@
     <MESSAGE value="Cells values and expected formats all checked.&#10;+ Repayment logic also hardly checked" />
     <MESSAGE value="Loans row cells are now converted to Loan objects" />
     <MESSAGE value="- Repayments are written in the files&#10;- Cells formatting added&#10;- Yearly total added" />
-    <MESSAGE value="- File browsing for Path&#10;- CMD line arguments for Path&#10;- Missing sheet error" />
-    <MESSAGE value="- Stats logic started&#10;- Stats excel data are computed" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Stats logic started&#10;- Stats excel data are computed" />
+    <MESSAGE value="Added colors by Colorama" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added colors by Colorama" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <condition expression="sheet is None" language="Python" />
-          <url>file://$PROJECT_DIR$/utilities/repayment_utility.py</url>
-          <line>85</line>
-          <option name="timeStamp" value="21" />
+          <condition expression="self.loanee.ID == &quot;HABOU100&quot;" language="Python" />
+          <url>file://$PROJECT_DIR$/models/repayment.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

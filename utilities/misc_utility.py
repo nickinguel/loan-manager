@@ -1,6 +1,5 @@
 import datetime
 import os
-from copy import copy
 from dateutil import relativedelta
 from openpyxl import Workbook
 from openpyxl.reader.excel import load_workbook
@@ -44,6 +43,6 @@ class MiscUtility:
         if len(items) == 0:
             return ""
 
-        sep = "\n\t- "
+        sep = "\n  - "
 
         return sep + sep.join(items)

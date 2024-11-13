@@ -1,5 +1,6 @@
 import sys
 
+from configs.configs import Configs
 from configs.constant_data import ConstData
 from models.loan import Loan
 from utilities.loan_utility import LoanUtility
@@ -12,12 +13,16 @@ def main():
 
     file_path: str | None = None
     # file_path = '/Volumes/MyData/Temp/Harelle/Loans.xlsx'
+    # file_path = 'D:\Temp\Harelle/Loans.xlsx'
+
+    Configs.app_is_launched_on_console_mode = True
 
     if len(sys.argv) >= 2:
         file_path = sys.argv[1]
 
     if file_path is None or len(file_path.strip()) == 0:
         file_path = MiscUtility.browse_file_path("Choisissez le fichier Excel à manipuler")
+        Configs.app_is_launched_on_console_mode = False
 
     loans: list[Loan]
     no_error = True
@@ -45,12 +50,9 @@ def main():
 
         # Find paid slices
         paid_slices = RepaymentUtility.find_paid_slices(file_path)
-        print(paid_slices)
-        print()
 
         # Compute stats data
         stats_data = RepaymentUtility.compute_stats(loans, paid_slices)
-        print([(v, stats_data[v].value) for v in stats_data])
 
         # Write stats
         RepaymentUtility.write_stats_to_excel(stats_data, file_path)
@@ -59,15 +61,14 @@ def main():
     except Exception as e:
         LogUtility.log_error(e)
         no_error = False
-        raise e
+        # raise e
 
     if no_error:
         LogUtility.log_success(ConstData.message_all_ok.format(file_path))
 
-    print()
-    LogUtility.log_info("-" * 25)
-    LogUtility.log_info(" - By Nick KINGUELEOUA - ")
-    LogUtility.log_info("-" * 25)
+    if Configs.app_is_launched_on_console_mode:
+        print()
+        LogUtility.log_info(LogUtility.format_brand_message())
 
 
 if __name__ == '__main__':
