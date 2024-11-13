@@ -43,10 +43,19 @@ def main():
         # Write data to workbook
         RepaymentUtility.write_repayments_to_excel(file_path, sheets_data)
 
+        # Find paid slices
+        paid_slices = RepaymentUtility.find_paid_slices(file_path)
+        print(paid_slices)
+
+        # Compute stats data
+        stats_data = RepaymentUtility.compute_stats(loans, paid_slices)
+        print([(v, stats_data[v].value) for v in stats_data])
+
+
     except Exception as e:
         LogUtility.log_error(e)
         no_error = False
-        # raise e
+        raise e
 
     if no_error:
         LogUtility.log_success(ConstData.message_all_ok.format(file_path))
